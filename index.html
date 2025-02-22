@@ -33,20 +33,82 @@
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
         }
+        nav {
+            width: 100%;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        li {
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin: 5px auto;
+            width: 80%;
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .orb-icon {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .orb-red .orb-icon { background: hsl(0, 100%, 50%); }
+        .orb-blue .orb-icon { background: hsl(220, 100%, 50%); }
+        .orb-green .orb-icon { background: hsl(120, 100%, 50%); }
     </style>
 </head>
 <body>
     <canvas id="orbCanvas"></canvas>
     <div class="center-box">
-        <nav></nav>
-            <ul>
-                <li><a href="https://bpeavy.dev/projects">Projects</a></li>
-                <li><a href="https://linkedin.com/in/blake-peavy/">LinkedIn</a></li>
-                <li><a href="https://github.com/BlakePeavy">GitHub</a></li>
-            </ul>
-        </nav>
+        <div id="content">
+            <nav id="mainNavigation" style="display: block;">
+                <ul>
+                    <li class="orb-red">
+                        <span class="orb-icon"></span>
+                        <a href="#" onclick="navigate('projects')">Projects</a></li>
+                    <li class="orb-blue">
+                        <span class="orb-icon"></span>
+                        <a href="https://linkedin.com/in/blake-peavy/">LinkedIn</a></li>
+                    <li class="orb-green">
+                        <span class="orb-icon"></span>
+                        <a href="https://github.com/BlakePeavy">GitHub</a></li>
+                </ul>
+            </nav>
+            <nav id="projectNavigation" style="display: none;">
+                <li class="orb-red">
+                    <span class="orb-icon"></span>
+                    <a href="https://numberlab.io/">NumberLab</a></li>
+                <li class="orb-blue">
+                    <span class="orb-icon"></span>
+                    <a href="#" onclick="navigate('home')">Back</a></li>
+            </nav>
+        </div>
     </div>
     <script>
+        function navigate(path){
+            switch (path){
+                // TODO: animate
+                case 'projects':
+                    document.getElementById('mainNavigation').style.display = 'none';
+                    document.getElementById('projectNavigation').style.display = 'block';
+                    break;
+                case 'home':
+                    document.getElementById('mainNavigation').style.display = 'block';
+                    document.getElementById('projectNavigation').style.display = 'none';
+                    break;
+            }
+
+        }
+
         const canvas = document.getElementById("orbCanvas");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
